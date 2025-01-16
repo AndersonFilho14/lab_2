@@ -1,42 +1,40 @@
 package Model;
-/**
- * Representa um cliente com benefícios de fidelidade, herdando as características do cliente.
- */
 
-public class ClienteFidelidade extends Cliente {
-	private int pontosAcumulados;
-	
-	/**
-     * Construtor para criar um cliente de fidelidade.
+import Controller.ClienteController; 
+
+/**
+ * Representa um cliente com benefícios de fidelidade, associando-se a um cliente e armazenando pontos acumulados.
+ */
+public class ClienteFidelidade {
+    private int clienteId; // ID do cliente associado
+    private int pontosAcumulados;
+
+    /**
+     * Construtor para criar um cliente de fidelidade a partir do ID do cliente e pontos acumulados.
      * 
-     * @param id O identificador único do cliente.
-     * @param nome O nome do cliente.
-     * @param cpf O CPF do cliente.
-     * @param email O email do cliente.
-     * @param telefone O telefone do cliente.
+     * @param clienteId O identificador único do cliente associado.
      * @param pontosAcumulados A quantidade de pontos acumulados pelo cliente.
+     * @param clienteController O controlador para verificar a existência do cliente.
      */
-	public ClienteFidelidade(int id, String nome, String cpf, String email, String telefone, int pontosAcumulados) {
-        super(id, nome, cpf, email, telefone);
-        if (pontosAcumulados < 0) {
-        	throw new IllegalArgumentException("Os pontos acumulados não podem ser negativos.");
-        }	
-        this.pontosAcumulados = pontosAcumulados;
-    }
-	
-	
-	/**
-     * Construtor para criar um cliente de fidelidade a partir de uma instância de cliente e pontos acumulados.
-     *
-     * @param cliente A instância do cliente que contém os dados como id, nome, cpf, email e telefone.
-     * @param pontosAcumulados A quantidade de pontos acumulados pelo cliente.
-     */
-    public ClienteFidelidade(Cliente cliente, int pontosAcumulados) {
-        super(cliente.getId(), cliente.getNome(), cliente.getCpf(), cliente.getEmail(), cliente.getTelefone());
+    public ClienteFidelidade(int clienteId, int pontosAcumulados, ClienteController clienteController) {
         if (pontosAcumulados < 0) {
             throw new IllegalArgumentException("Os pontos acumulados não podem ser negativos.");
         }
+        // Valida se o cliente com o ID fornecido existe
+        if (!clienteController.existeCliente(clienteId)) {
+            throw new IllegalArgumentException("Cliente com o ID informado não existe.");
+        }
+
+        this.clienteId = clienteId;
         this.pontosAcumulados = pontosAcumulados;
+    }
+
+    public int getClienteId() {
+        return clienteId;
+    }
+
+    public void setClienteId(int clienteId) {
+        this.clienteId = clienteId;
     }
 
     public int getPontosAcumulados() {
