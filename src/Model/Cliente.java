@@ -1,76 +1,52 @@
 package Model;
 
-import View.MainView;
-
 /**
- * Representa um cliente com informações como id, nome, CPF, email e telefone.
+ * Representa um cliente, que herda atributos básicos de Pessoa
+ * e possui um sistema de fidelidade com pontos acumulados.
  */
-public class Cliente {
-	private int id;
-    private String nome;
-    private String cpf;
-    private String email;
-    private String telefone;
-	
- /**
-     * Construtor para criar um novo cliente.
+public class Cliente extends Pessoa {
+    private int pontosFidelidade;
+
+    /**
+     * Construtor para criar um cliente com os dados fornecidos.
+     * Inicializa os pontos de fidelidade com zero.
      * 
-     * @param id O identificador único do cliente.
      * @param nome O nome do cliente.
-     * @param cpf O CPF do cliente.
      * @param email O email do cliente.
+     * @param senha A senha do cliente.
+     * @param cpf O CPF do cliente.
      * @param telefone O telefone do cliente.
      */
-    public Cliente(int id, String nome, String cpf, String email, String telefone) {
-    	if (id < 0) throw new IllegalArgumentException("ID deve ser maior que zero.");
-        if (nome == null || nome.isEmpty()) throw new IllegalArgumentException("Nome não pode ser vazio.");
-        setCpf(cpf);
-        if (!email.contains("@")) throw new IllegalArgumentException("Email inválido.");
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
+    public Cliente(String nome, String email, String senha, String cpf, String telefone) {
+        super(nome, email, senha, cpf, telefone);
+        this.pontosFidelidade = 0; 
     }
 
-    public int getId() {
-        return id;
+
+    public int getPontosFidelidade() {
+        return pontosFidelidade;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        if (cpf == null || !cpf.matches("\\d{11}")) {
-            throw new IllegalArgumentException("CPF deve conter exatamente 11 dígitos numéricos.");
+    public void setPontosFidelidade(int pontosFidelidade) {
+        if (pontosFidelidade < 0) {
+            throw new IllegalArgumentException("Pontos de fidelidade não podem ser negativos.");
         }
-        this.cpf = cpf;
-    }
-    public String getEmail() {
-        return email;
+        this.pontosFidelidade = pontosFidelidade;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+
+    public void adicionarPontos(int pontos) {
+        if (pontos < 0) {
+            throw new IllegalArgumentException("Não é possível adicionar pontos negativos.");
+        }
+        this.pontosFidelidade += pontos;
     }
 
-    public String getTelefone() {
-        return telefone;
-    }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void removerPontos(int pontos) {
+        if (pontos < 0 || pontos > this.pontosFidelidade) {
+            throw new IllegalArgumentException("Quantidade de pontos inválida para remoção.");
+        }
+        this.pontosFidelidade -= pontos;
     }
 }
