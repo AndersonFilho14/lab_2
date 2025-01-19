@@ -5,7 +5,7 @@ package Model;
  * A classe fornece métodos para manipulação desses dados e validações de entrada.
  */
 public abstract class Pessoa {
-    private int id; // Gerado automaticamente
+    private int id; 
     private String nome;
     private String email;
     private String senha;
@@ -35,7 +35,6 @@ public abstract class Pessoa {
             throw new IllegalArgumentException("CPF deve conter exatamente 11 dígitos.");
         }
 
-        this.id = gerarIdUnico();
         this.nome = nome;
         this.email = email;
         this.senha = senha;
@@ -43,14 +42,9 @@ public abstract class Pessoa {
         this.telefone = telefone != null ? telefone : ""; // Telefone pode ser vazio
     }
 
-    /**
-     * Gera um ID único aleatório para a pessoa.
-     * 
-     * @return Um ID único gerado aleatoriamente.
-     */
-    private int gerarIdUnico() {
-        return (int) (Math.random() * 10000); // Apenas um exemplo simples de geração de ID
-    }
+    public void setId(int id) {
+		this.id = id;
+	}
 
     // Getters e setters
     public int getId() {
