@@ -1,80 +1,67 @@
 package Model;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
- * Representa um produto com informações de id, nome, preço e quantidade.
+ * Representa um produto no supermercado.
+ * Contém informações sobre nome, validade, preço e categoria do produto.
  */
 public class Produto {
-
-    private int id;
-    private String nome;
-    private double preco; 
-    private int quantidade;
-
+	private String nome;
+	private LocalDate validade;
+	private float preco;
+	private Categoria categoria;
+	
     /**
-     * Construtor para criar um novo produto.
-     *
-     * @param id         O identificador único do produto (deve ser maior que zero).
-     * @param nome       O nome do produto (não pode ser nulo ou vazio).
-     * @param preco      O preço do produto (não pode ser negativo).
-     * @param quantidade A quantidade do produto disponível (deve ser maior que zero).
+     * Constrói um novo produto com as informações fornecidas.
+     * 
+     * @param nome Nome do produto.
+     * @param validade Data de validade do produto no formato "yyyy-MM-dd".
+     * @param preco Preço do produto (em formato float).
+     * @param categoria Categoria à qual o produto pertence.
      */
-    public Produto(int id, String nome, double preco, int quantidade) {
-        if (id <= 0) throw new IllegalArgumentException("ID deve ser maior que zero.");
-        if (nome == null || nome.trim().isEmpty()) throw new IllegalArgumentException("Nome não pode ser vazio.");
-        if (preco < 0) throw new IllegalArgumentException("Preço não pode ser negativo.");
-        if (quantidade < 0) throw new IllegalArgumentException("Quantidade não pode ser negativa.");
-
-        this.id = id;
-        this.nome = nome;
+	public Produto(String nome, String validade, float preco, Categoria categoria) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		this.nome = nome;
+        this.validade = LocalDate.parse(validade, formatter);
         this.preco = preco;
-        this.quantidade = quantidade;
+        this.categoria = categoria;
     }
+	
+	
+	public String getNome() {
+		return nome;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public LocalDate getValidade() {
+		return validade;
+	}
 
-    public void setId(int id) {
-        if (id <= 0) throw new IllegalArgumentException("ID deve ser maior que zero.");
-        this.id = id;
-    }
+	public void setValidade(LocalDate validade) {
+		this.validade = validade;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public float getPreco() {
+		return preco;
+	}
 
-    public void setNome(String nome) {
-        if (nome == null || nome.trim().isEmpty()) throw new IllegalArgumentException("Nome não pode ser vazio.");
-        this.nome = nome;
-    }
+	public void setPreco(float preco) {
+		this.preco = preco;
+	}
 
-    public double getPreco() {
-        return preco;
-    }
+	public Categoria getCategoria() {
+		return categoria;
+	}
 
-    public void setPreco(double preco) {
-        if (preco < 0) throw new IllegalArgumentException("Preço não pode ser negativo.");
-        this.preco = preco; //
-    }
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
 
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        if (quantidade < 0) throw new IllegalArgumentException("Quantidade não pode ser negativa.");
-        this.quantidade = quantidade;
-    }
-
-    /**
-     * Sobrescreve o método toString para exibir as informações do produto.
-     */
-    @Override
-    public String toString() {
-        return String.format("Produto[id=%d, nome='%s', preco=%.2f, quantidade=%d]", 
-                             id, nome, preco, quantidade);
-    }
-
- }
-
+	@Override
+	public String toString() {
+		return "Produto [nome=" + nome + ", validade=" + validade + ", preco=" + preco + ", categoria=" + categoria
+				+ "]";
+	}
+	
+}
