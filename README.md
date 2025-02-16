@@ -57,6 +57,7 @@ CREATE TABLE produtos (
 
 Estrutura do projeto:
 
+```plaintext
 lab_2/
  ├── src/
  │   ├── main.java
@@ -72,5 +73,6 @@ lab_2/
  │   └── View/
  │        ├── ClienteView.java
  │        └── LoginView.java
+```
 
  
