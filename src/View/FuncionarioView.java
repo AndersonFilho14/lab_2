@@ -59,7 +59,8 @@ public class FuncionarioView {
                         System.out.println("Nenhum funcionário cadastrado.");
                     } else {
                         for (Funcionario f : funcionarios) {
-                            System.out.println("Nome: " + f.getNome() 
+                            System.out.println("ID: " + f.getId() 
+                            		+	" | Nome: " + f.getNome() 
                                     + " | Email: " + f.getEmail() 
                                     + " | Cargo: " + f.getCargo() 
                                     + " | Empregado: " + f.getEmpregado());

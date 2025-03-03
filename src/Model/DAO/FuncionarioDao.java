@@ -86,6 +86,7 @@ public class FuncionarioDao {
                     rs.getString("cpf"),
                     rs.getString("telefone")
                 );
+                f.setId(rs.getInt("id"));
                 f.setCargo(rs.getInt("cargo"));
                 f.setEmpregado(rs.getBoolean("empregado"));
                 funcionarios.add(f);
