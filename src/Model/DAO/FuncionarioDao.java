@@ -122,4 +122,37 @@ public class FuncionarioDao {
             stmt.executeUpdate();
         }
     }
+    
+    /**
+     * Demite um funcionário definindo o campo empregado como 0.
+     * 
+     * Esse método atualiza o campo empregado para 0 (demitido)
+     * onde o nome do funcionário corresponder ao parâmetro passado.
+     */
+    public void demitirFuncionarioPorNome(String nome) throws SQLException {
+        String sql = "UPDATE funcionarios SET empregado = 0 WHERE nome = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, nome);
+            stmt.executeUpdate();
+        }
+    }
+    
+    public void empregarFuncionarioPorNome(String nome) throws SQLException {
+        String sql = "UPDATE funcionarios SET empregado = 1 WHERE nome = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, nome);
+            stmt.executeUpdate();
+        }
+    }
+    
+    public void mudarCargoFuncionarioPorNome(String nome, int novoCargo) throws SQLException {
+        String sql = "UPDATE funcionarios SET cargo = ? WHERE nome = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, novoCargo);
+            stmt.setString(2, nome);
+            stmt.executeUpdate();
+        }
+    }
+    
+
 }

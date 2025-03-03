@@ -11,7 +11,16 @@ import java.util.List;
 public class FuncionarioController {
     FuncionarioDao funcionarioDao = new FuncionarioDao();
 
-
+    /**
+     * Adiciona um novo funcionário.
+     * 
+     * @param nome      Nome do funcionário.
+     * @param email     Email do funcionário.
+     * @param senha     Senha do funcionário.
+     * @param cpf       CPF do funcionário.
+     * @param telefone  Telefone do funcionário.
+     * @param cargo     Cargo do funcionário (número).
+     */
     public void adicionarFuncionario(String nome, String email, String senha, String cpf, String telefone, int cargo) {
         Funcionario funcionario = new Funcionario(nome, email, senha, cpf, telefone);
         funcionario.setCargo(cargo);
@@ -23,6 +32,11 @@ public class FuncionarioController {
         }
     }
 
+    /**
+     * Retorna a lista de funcionários cadastrados.
+     * 
+     * @return Lista de funcionários.
+     */
     public List<Funcionario> listarFuncionarios() {
         try {
             return funcionarioDao.listar();
@@ -32,6 +46,18 @@ public class FuncionarioController {
         }
     }
 
+    /**
+     * Atualiza os dados de um funcionário.
+     * 
+     * @param id         ID do funcionário a ser atualizado.
+     * @param nome       Novo nome.
+     * @param email      Novo email.
+     * @param senha      Nova senha.
+     * @param cpf        Novo CPF.
+     * @param telefone   Novo telefone.
+     * @param cargo      Novo cargo (número).
+     * @param empregado  Novo status de empregado.
+     */
     public void atualizarFuncionario(int id, String nome, String email, String senha, String cpf, String telefone, int cargo, boolean empregado) {
         Funcionario funcionario = new Funcionario(nome, email, senha, cpf, telefone);
         funcionario.setCargo(cargo);
@@ -44,6 +70,11 @@ public class FuncionarioController {
         }
     }
 
+    /**
+     * Remove um funcionário com base no ID.
+     * 
+     * @param id ID do funcionário a ser removido.
+     */
     public void deletarFuncionario(int id) {
         try {
         	funcionarioDao.deletar(id);
@@ -53,6 +84,13 @@ public class FuncionarioController {
         }
     }
 
+    /**
+     * Realiza o login do funcionário.
+     * 
+     * @param email Email do funcionário.
+     * @param senha Senha do funcionário.
+     * @return Objeto Funcionario se o login for bem-sucedido, caso contrário null.
+     */
     public Funcionario loginFuncionario(String email, String senha) {
         try {
             return funcionarioDao.consultarFuncionarioPorEmailESenha(email, senha);
@@ -61,4 +99,48 @@ public class FuncionarioController {
             return null;
         }
     }
+    
+    /**
+     * Demite o funcionário pelo nome, definindo o campo empregado como 0.
+     * 
+     * @param nome Nome do funcionário a ser demitido.
+     */
+    public void demitirFuncionario(String nome) {
+    	try {
+    		funcionarioDao.demitirFuncionarioPorNome(nome); 
+    		System.out.println("Funcionário demitido com sucesso!");
+    	} catch(SQLException e) {
+    		System.err.println("Erro ao realizar demissão: " + e.getMessage());
+    	}
+    }
+    
+    /**
+     * Contrata (ou reemprega) o funcionário pelo nome, definindo o campo empregado como 1.
+     * 
+     * @param nome Nome do funcionário a ser contratado.
+     */
+    public void empregarFuncionario(String nome){
+    	try {
+    		funcionarioDao.empregarFuncionarioPorNome(nome); 
+    		System.out.println("Funcionário contratado com sucesso!");
+    	} catch(SQLException e) {
+    		System.err.println("Erro ao realizar contratação: " + e.getMessage());
+    	}
+    }
+
+    /**
+     * Alterar cargo para o novo valor informado.
+     * 
+     * @param nome      Nome do funcionário.
+     * @param novoCargo Novo cargo (número) que será atribuído.
+     */
+    public void mudarCargoFuncionarioNome(String nome, int novoCargo) {
+        try {
+            funcionarioDao.mudarCargoFuncionarioPorNome(nome, novoCargo);
+            System.out.println("Funcionário promovido com sucesso!");
+        } catch (SQLException e) {
+            System.err.println("Erro ao promover funcionário: " + e.getMessage());
+        }
+    }
+
 }
