@@ -28,7 +28,7 @@ public class ClienteView {
      * O menu continua sendo exibido até que o usuário escolha sair.
      */
     public void exibirMenu() {
-        int opcao;
+    	int opcao;
         do {
             System.out.println("\nMenu de Clientes:");
             System.out.println("1 - Cadastrar Cliente");
