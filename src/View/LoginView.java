@@ -74,7 +74,7 @@ public class LoginView {
         Cliente cliente = clienteController.verificarLogin(email, senha);
         if (cliente != null) {
             System.out.println("Bem-vindo, " + cliente.getNome() + "!");
-            //tela de compras futura	
+            //tela de compras futura	que recebe o nome do cliente
         } else {
             System.out.println("E-mail ou senha incorretos.");
         }

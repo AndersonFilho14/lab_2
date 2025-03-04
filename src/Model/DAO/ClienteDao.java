@@ -14,10 +14,6 @@ public class ClienteDao {
     private Connection conn;
 
     
-    /**
-     * Construtor que inicializa a conexão com o banco de dados.
-     * Caso ocorra algum erro na conexão, um erro é impresso no console e a conexão é atribuída como null.
-     */
     public ClienteDao() {
         try {
             this.conn = ConnectionFactory.createdConnectionToMySQL(); // Conectar ao banco de dados
