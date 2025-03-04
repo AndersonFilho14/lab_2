@@ -18,9 +18,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-//ClienteController clienteControler = new ClienteController();
-//LoginView loginView = new LoginView(clienteControler);
-//loginView.exibirMenu();
+LoginView loginView = new LoginView();
+loginView.exibirMenu();
 
 //         Criando produto usando o método de fábrica
 //        Produto carne = new Produto("Carne Bovina", "2025-12-31", (float) 30.00 , Categoria.COMIDA, 100);
@@ -31,10 +30,10 @@ public class Main {
 //		ProdutoView pv = new ProdutoView(produtoController);
 //		pv.exibirMenu();
 
-FuncionarioController funcionarioController = new FuncionarioController();
-FuncionarioView funcionarioView = new FuncionarioView(funcionarioController);
-funcionarioView.exibirMenuGerente();
-funcionarioView.exibirMenuFuncionario();
+//FuncionarioController funcionarioController = new FuncionarioController();
+//FuncionarioView funcionarioView = new FuncionarioView(funcionarioController);
+//funcionarioView.exibirMenuGerente();
+//funcionarioView.exibirMenuFuncionario();
 		
 
 	}

@@ -1,17 +1,24 @@
 package View;
 
 import Controller.ClienteController;
+import Controller.FuncionarioController;
 import Model.Cliente;
+import Model.Funcionario;
+
 import java.util.Scanner;
 
 public class LoginView {
     private ClienteController clienteController;
+    private FuncionarioController funcionarioController;
     private Scanner scanner;
+    private FuncionarioView funcionarioView;
 
-    public LoginView(ClienteController clienteController) {
-        this.clienteController = clienteController;
+    // Inicialização direta sem precisar passar pelo construtor
+    public LoginView() {
+        this.clienteController = new ClienteController();
+        this.funcionarioController = new FuncionarioController();
         this.scanner = new Scanner(System.in);
-        
+        this.funcionarioView = new FuncionarioView(funcionarioController);
     }
 
     /**
@@ -113,10 +120,21 @@ public class LoginView {
      */
     private void acessarComoFuncionario() {
         System.out.println("\nAcesso de Funcionário:");
-        System.out.print("Digite o ID do funcionário: ");
-        String idFuncionario = scanner.nextLine();
+        System.out.print("Digite o email do funcionário: ");
+        String emailFuncionario = scanner.nextLine();
         System.out.print("Digite a senha do funcionário: ");
         String senhaFuncionario = scanner.nextLine();
-        System.out.println("Bem-vindo, Funcionário!");
+        Funcionario funcionario = funcionarioController.loginFuncionario(emailFuncionario, senhaFuncionario);
+        if (funcionario != null) {
+            if (funcionario.getId() == 1) {
+                System.out.println("Bem-vindo, Funcionário " + funcionario.getNome() + " .");
+                funcionarioView.exibirMenuFuncionario();
+            } else {
+                System.out.println("Bem-vindo, Gerente " + funcionario.getNome() + " .");
+                funcionarioView.exibirMenuGerente();
+            }
+        } else {
+            System.out.println("Email ou senha incorretos.");
+        }
     }
 }
