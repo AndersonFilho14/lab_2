@@ -38,7 +38,7 @@ public class ProdutoController {
     }
 
     // Buscar um produto pelo ID
-    public Produto buscarProdutoPorId(String nome) {
+    public Produto buscarProdutoPorNome(String nome) {
         return produtoDao.buscarProdutoPorNome(nome);
     }
 }

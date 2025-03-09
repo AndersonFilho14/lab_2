@@ -27,16 +27,16 @@ Descrição: Um sistema de gerenciamento para um supermercado.
 
 TAB clientes:
 ```sql
-CREATE TABLE clientes (
-   id int(11) NOT NULL AUTO_INCREMENT,
-   nome varchar(255) NOT NULL,
-   email varchar(100) NOT NULL,
-   senha varchar(255) NOT NULL,
-   cpf char(11) NOT NULL,
-   telefone varchar(15) DEFAULT NULL,
-   pontos_fidelidade int(11) DEFAULT 0,
-   PRIMARY KEY (id),
-   UNIQUE KEY unique_email (email)
+CREATE TABLE `clientes` (
+   `id` int(11) NOT NULL AUTO_INCREMENT,
+   `nome` varchar(255) NOT NULL,
+   `email` varchar(100) NOT NULL,
+   `senha` varchar(255) NOT NULL,
+   `cpf` char(11) NOT NULL,
+   `telefone` varchar(15) DEFAULT NULL,
+   `pontos_fidelidade` int(11) DEFAULT 0,
+   PRIMARY KEY (`id`),
+   UNIQUE KEY `unique_email` (`email`)
  ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
 ```
 
@@ -49,10 +49,12 @@ CREATE TABLE `funcionarios` (
    `email` varchar(45) NOT NULL,
    `senha` varchar(45) NOT NULL,
    `cpf` varchar(11) NOT NULL,
+   `empregado` tinyint(1) NOT NULL DEFAULT 1,
+   `telefone` varchar(15) DEFAULT NULL,
    PRIMARY KEY (`id`),
    UNIQUE KEY `cpf_UNIQUE` (`cpf`),
    UNIQUE KEY `email_UNIQUE` (`email`)
- ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+ ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
 ```
 
 TAB produtos:
@@ -65,8 +67,9 @@ CREATE TABLE `produtos` (
    `preco_produto` decimal(10,2) NOT NULL,
    `validade_produto` date NOT NULL,
    `id_funcionario` int(11) NOT NULL,
+   `prateleira` tinyint(1) DEFAULT 1,
    PRIMARY KEY (`id_produtos`)
- ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+ ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
 ```
 
 ## Mapa das Classes
@@ -77,19 +80,24 @@ Estrutura do projeto:
 lab_2/
  ├── src/
  │   ├── main.java
- │   └── Controller/
+ │   ├── Controller/
  │   │    ├── ClienteController.java
- │   │    └── FuncionarioController.java
+ │   │    ├── FuncionarioController.java
+ │   │    └── ProdutoController.java
  │   ├── Model/
  │   │    ├── Dao/
  │   │    │   ├── ClienteDao.java
- │   │    │   └── FuncionarioDao.java
+ │   │    │   ├── FuncionarioDao.java
+ │   │    │   └── ProdutoDao.java
  │   │    ├── Database/
  │   │    │   └── ConnectionFactory
+ │   │    ├── Categoria.java
  │   │    ├── Cliente.java
  │   │    ├── Funcionario.java
- │   │    └── Pessoa.java
+ │   │    ├── Pessoa.java
+ │   │    └── Produto.java
  │   └── View/
  │        ├── ClienteView.java
- │        └── FuncionarioView.java
- │        └── LoginView.java
+ │        ├── FuncionarioView.java
+ │        ├── LoginView.java
+ │        └── ProdutoView.java
