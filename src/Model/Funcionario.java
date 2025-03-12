@@ -1,7 +1,6 @@
 package Model;
 
 public class Funcionario extends Pessoa {
-		private int id;
 		private int cargo;
 	    private boolean empregado;
 
@@ -17,13 +16,6 @@ public Funcionario(String nome, String email, String senha, String cpf, String t
 	            throw new IllegalArgumentException("Cargo não pode ser menor que 1.");
 	        }
 }
-			public int getId() {
-		    return id;
-		}
-		
-			public void setId(int id) {
-		    this.id = id;
-		}
 	    public int getCargo() {
 	        return cargo;
 	    }

@@ -25,8 +25,7 @@ public class ProdutoController {
     }
 
     // Atualizar um produto existente
-    public void atualizarProduto(int id, String nome, String validade, float preco, Categoria categoria, int quantidade, boolean prateleira) {
-        Produto produto = new Produto(id, nome, validade, preco, categoria, quantidade, prateleira);
+    public void atualizarProduto(Produto produto) {
         produtoDao.atualizarProduto(produto);
         System.out.println("Produto atualizado com sucesso!");
     }
@@ -41,6 +40,37 @@ public class ProdutoController {
     public Produto buscarProdutoPorNome(String nome) {
         return produtoDao.buscarProdutoPorNome(nome);
     }
+    
+    public Produto buscarProdutoPorId(int id) {
+        return produtoDao.buscarProdutoPorId(id);
+    }    
+    
+    public void comprarProduto(int id, int quantidade) {
+        Produto produto = produtoDao.buscarProdutoPorId(id);
+        if (produto != null && produto.getQuantidade() >= quantidade) {
+            produtoDao.subtrairQuantidade(id, quantidade);
+            System.out.println("Compra realizada com sucesso!");
+        } else {
+            System.out.println("Quantidade insuficiente em estoque do produto"+ produto.getNome());
+        }
+    }
+    
+    public void colocarNaPrateleira(int id) {
+        produtoDao.alterarPrateleira(id, true);
+        System.out.println("Produto colocado na prateleira com sucesso!");
+    }
+
+    public void retirarDaPrateleira(int id) {
+        produtoDao.alterarPrateleira(id, false);
+        System.out.println("Produto retirado da prateleira com sucesso!");
+    }
+    
+    public List<Produto> produtosComValidadeProxima(int dias) {
+        return produtoDao.validadeProxima(dias);
+    }
+    
+    
+    
 }
 
 //    diminiuir quantidade de produto qunado tiver uma compra(lembrando de não poder comprar mais do que tem no bd)

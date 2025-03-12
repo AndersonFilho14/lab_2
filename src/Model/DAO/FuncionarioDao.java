@@ -37,6 +37,7 @@ public class FuncionarioDao {
             stmt.setString(2, senha);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
+                    int id = rs.getInt("id"); // Obtém o id do funcionário
                     Funcionario funcionario = new Funcionario(
                         rs.getString("nome"),
                         rs.getString("email"),
@@ -44,6 +45,7 @@ public class FuncionarioDao {
                         rs.getString("cpf"),
                         rs.getString("telefone")
                     );
+                    funcionario.setId(id); // Atribui o id ao objeto
                     funcionario.setCargo(rs.getInt("cargo"));
                     funcionario.setEmpregado(rs.getBoolean("empregado"));
                     return funcionario;

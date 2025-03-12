@@ -126,9 +126,9 @@ public class LoginView {
         String senhaFuncionario = scanner.nextLine();
         Funcionario funcionario = funcionarioController.loginFuncionario(emailFuncionario, senhaFuncionario);
         if (funcionario != null) {
-            if (funcionario.getId() == 1) {
+            if (funcionario.getCargo() == 1) {
                 System.out.println("Bem-vindo, Funcionário " + funcionario.getNome() + " .");
-                funcionarioView.exibirMenuFuncionario();
+                funcionarioView.exibirMenuFuncionario(funcionario);
             } else {
                 System.out.println("Bem-vindo, Gerente " + funcionario.getNome() + " .");
                 funcionarioView.exibirMenuGerente();

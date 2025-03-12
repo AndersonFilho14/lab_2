@@ -1,8 +1,10 @@
 package Controller;
 
 import Model.DAO.FuncionarioDao;
+import Model.DAO.ProdutoDao;
 import Model.Cliente;
 import Model.Funcionario;
+import Model.Produto;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -143,4 +145,17 @@ public class FuncionarioController {
         }
     }
 
+    public void getProdutosAdicionadosPeloFuncionario_id(int id) {
+		ProdutoDao produtoDao = new ProdutoDao();
+		List<Produto> produtos = produtoDao.buscarProdutoPeloid_funcionario(id);
+		
+		if (produtos.isEmpty()) {
+	        System.out.println("Este funcionário ainda não adicionou nenhum produto.");
+	    } else {
+	        System.out.println("Produtos adicionados:");
+	        for (Produto produto : produtos) {
+	            System.out.println(produto);
+	           }
+    	}
+    }
 }

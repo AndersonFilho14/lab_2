@@ -21,18 +21,20 @@ public class Main {
 
 	public static void main(String[] args) {
 //		
-//LoginView loginView = new LoginView();
-//loginView.exibirMenu();
+LoginView loginView = new LoginView();
+loginView.exibirMenu();
 
-ClienteController clienteController = new ClienteController();
-ClienteView clienteView = new ClienteView(clienteController);
-clienteView.exibirMenu();
+//ClienteController clienteController = new ClienteController();
+//ClienteView clienteView = new ClienteView(clienteController);
+//clienteView.exibirMenu();
 //
 //FuncionarioController funcionarioController = new FuncionarioController();
 //FuncionarioView funcionarioView = new FuncionarioView(funcionarioController);
 //funcionarioView.exibirMenuGerente();
         // Exibindo o produto
 //		ProdutoController produtoController = new ProdutoController();
+//		ProdutoView produtoView = new ProdutoView(produtoController);
+//		produtoView.exibirMenu();
 //		ProdutoView pv = new ProdutoView(produtoController);
 //		pv.exibirMenu();
 
@@ -42,6 +44,7 @@ clienteView.exibirMenu();
 //			System.out.println("Não tem produtos vencendo nos " + x + " dias");
 //		} else {
 //		System.out.println(vencendo);
+
 	}
 }
 
