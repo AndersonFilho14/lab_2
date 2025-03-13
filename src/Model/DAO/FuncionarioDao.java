@@ -157,5 +157,33 @@ public class FuncionarioDao {
         }
     }
     
-
+    /**
+     * Busca um funcionário no banco de dados pelo seu id.
+     * 
+     * @param id O id do funcionário.
+     * @return O objeto Funcionario correspondente ao id fornecido, ou null se não encontrado.
+     * @throws SQLException Se ocorrer algum erro ao acessar o banco de dados.
+     */
+    public Funcionario buscarFuncionarioPorId(int id) throws SQLException {
+        String sql = "SELECT * FROM funcionarios WHERE id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    Funcionario f = new Funcionario(
+                        rs.getString("nome"),
+                        rs.getString("email"),
+                        rs.getString("senha"),
+                        rs.getString("cpf"),
+                        rs.getString("telefone")
+                    );
+                    f.setId(rs.getInt("id"));
+                    f.setCargo(rs.getInt("cargo"));
+                    f.setEmpregado(rs.getBoolean("empregado"));
+                    return f;
+                }
+            }
+        }
+        return null;
+    }
 }

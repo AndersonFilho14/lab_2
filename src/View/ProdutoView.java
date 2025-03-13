@@ -2,9 +2,11 @@ package View;
 
 import Controller.ProdutoController;
 import Model.Categoria;
+import Model.Funcionario;
 import Model.Produto;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class ProdutoView {
@@ -14,12 +16,13 @@ public class ProdutoView {
     public ProdutoView(ProdutoController produtoController) {
         this.produtoController = produtoController;
         this.scanner = new Scanner(System.in);
+        scanner.useLocale(Locale.US);
     }
 
-    public void exibirMenuGerente() {
+    public void exibirMenuGerente(Funcionario funcionario) {
         int opcao;
         do {
-            System.out.println("\nMenu de Produtos:");
+            System.out.println("\nMenu de Produtos Gerente:");
             System.out.println("1 - Adicionar Produto");
             System.out.println("2 - Editar Produto");
             System.out.println("3 - Remover Produto");
@@ -34,7 +37,7 @@ public class ProdutoView {
 
             switch (opcao) {
                 case 1:
-                    cadastrarProduto();
+                    cadastrarProduto(funcionario);
                     break;
                 case 2:
                     editarProduto();
@@ -60,19 +63,19 @@ public class ProdutoView {
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
             }
-        } while (opcao != 8);
+        } while (opcao != 0);
     }
 
-    public void exibirMenuFuncionario() {
+    public void exibirMenuFuncionario(Funcionario funcionario) {
         int opcao;
         do {
-            System.out.println("\nMenu de Produtos:");
+            System.out.println("\nMenu de Produtos Funcionario:");
             System.out.println("1 - Adicionar Produto");
             System.out.println("2 - Editar Produto");
-            System.out.println("4 - Listar Produtos");
-            System.out.println("5 - Colocar na Prateleira");
-            System.out.println("6 - Retirar da Prateleira");
-            System.out.println("7 - Verificar Produtos Próximos da Validade");
+            System.out.println("3 - Listar Produtos");
+            System.out.println("4 - Colocar na Prateleira");
+            System.out.println("5 - Retirar da Prateleira");
+            System.out.println("6 - Verificar Produtos Próximos da Validade");
             System.out.println("0 - Sair");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
@@ -80,7 +83,7 @@ public class ProdutoView {
 
             switch (opcao) {
                 case 1:
-                    cadastrarProduto();
+                    cadastrarProduto(funcionario);
                     break;
                 case 2:
                     editarProduto();
@@ -103,12 +106,12 @@ public class ProdutoView {
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
             }
-        } while (opcao != 8);
+        } while ( opcao != 0);
     }
 
     
     
-    private void cadastrarProduto() {
+    private void cadastrarProduto(Funcionario funcionario) {
         System.out.println("\nCadastro de Produto:");
 
         System.out.print("Digite o nome do produto: ");
@@ -130,7 +133,7 @@ public class ProdutoView {
         int quantidade = scanner.nextInt();
         scanner.nextLine();
 
-        produtoController.adicionarProduto(nome, validade, preco, categoria, quantidade, 1); 
+        produtoController.adicionarProduto(nome, validade, preco, categoria, quantidade, funcionario.getId()); 
         System.out.println("Produto cadastrado com sucesso!");
     }
 

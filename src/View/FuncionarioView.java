@@ -1,6 +1,7 @@
 package View;
 
 import Controller.FuncionarioController;
+import Controller.ProdutoController;
 import Model.Funcionario;
 
 import java.io.FileOutputStream;
@@ -17,16 +18,17 @@ public class FuncionarioView {
     }
 
     // ===== MENU GERENTE =====
-    public void exibirMenuGerente() {
+    public void exibirMenuGerente(Funcionario funcionario) {
         int opcao;
         do {
-            System.out.println("\n--- MENU FUNCIONÁRIOS Peão PLus (Gerente) ---");
+            System.out.println("\n--- MENU FUNCIONÁRIOS Peão PLus (Gerente) ---"); 
             System.out.println("1 - Adicionar Funcionário");
             System.out.println("2 - Listar Funcionários");
             System.out.println("3 - Atualizar Funcionário");
             System.out.println("4 - Demitir / Recontratar Funcionário");
             System.out.println("5 - Promover / Despromover Funcionário");
-            System.out.println("6 - Verificar trabalho de funcionário por nome"); 
+            System.out.println("6 - Verificar trabalho de funcionário por id");
+            System.out.println("7 - Menu de gerente para Produtos"); 
             System.out.println("0 - Sair");
             System.out.print("Escolha uma opção: ");
 
@@ -35,6 +37,7 @@ public class FuncionarioView {
 
             switch (opcao) {
                 case 1:
+//                	Adicionar Funcionário
                     System.out.print("Nome: ");
                     String nome = scanner.nextLine();
                     System.out.print("Email: ");
@@ -69,26 +72,46 @@ public class FuncionarioView {
                     break;
 
                 case 3:
-                    // Atualizar Funcionário
+                	// Atualizar Funcionário
+                	System.out.println("Caso não queira atualizar valor, basta aperta enter");
                     System.out.print("ID do funcionário para atualizar: ");
                     int idAtualizar = scanner.nextInt();
                     scanner.nextLine();
 
-                    System.out.print("Novo nome: ");
+                    Funcionario funcionarioAtual = funcionarioController.buscarFuncionarioPorId(idAtualizar);
+                    
+                    if (funcionarioAtual == null) {
+                        System.out.println("Funcionário não encontrado.");
+                        break;
+                    }
+
+                    System.out.print("Novo nome (" + funcionarioAtual.getNome() + "): ");
                     String novoNome = scanner.nextLine();
-                    System.out.print("Novo email: ");
+                    if (novoNome.isEmpty()) novoNome = funcionarioAtual.getNome();
+
+                    System.out.print("Novo email (" + funcionarioAtual.getEmail() + "): ");
                     String novoEmail = scanner.nextLine();
+                    if (novoEmail.isEmpty()) novoEmail = funcionarioAtual.getEmail();
+
                     System.out.print("Nova senha: ");
                     String novaSenha = scanner.nextLine();
-                    System.out.print("Novo CPF: ");
+                    if (novaSenha.isEmpty()) novaSenha = funcionarioAtual.getSenha();
+
+                    System.out.print("Novo CPF (" + funcionarioAtual.getCpf() + "): ");
                     String novoCpf = scanner.nextLine();
-                    System.out.print("Novo telefone: ");
+                    if (novoCpf.isEmpty()) novoCpf = funcionarioAtual.getCpf();
+
+                    System.out.print("Novo telefone (" + funcionarioAtual.getTelefone() + "): ");
                     String novoTelefone = scanner.nextLine();
-                    System.out.print("Novo cargo (número): ");
-                    int novoCargo = scanner.nextInt();
-                    System.out.print("Está empregado? (true/false): ");
-                    boolean empregado = scanner.nextBoolean();
-                    scanner.nextLine(); 
+                    if (novoTelefone.isEmpty()) novoTelefone = funcionarioAtual.getTelefone();
+
+                    System.out.print("Novo cargo (" + funcionarioAtual.getCargo() + "): ");
+                    String cargoInput = scanner.nextLine();
+                    int novoCargo = cargoInput.isEmpty() ? funcionarioAtual.getCargo() : Integer.parseInt(cargoInput);
+
+                    System.out.print("Está empregado? (" + funcionarioAtual.getEmpregado() + "): ");
+                    String empregadoInput = scanner.nextLine();
+                    boolean empregado = empregadoInput.isEmpty() ? funcionarioAtual.getEmpregado() : Boolean.parseBoolean(empregadoInput);
 
                     funcionarioController.atualizarFuncionario(idAtualizar, novoNome, novoEmail, novaSenha, novoCpf, novoTelefone, novoCargo, empregado);
                     break;
@@ -122,8 +145,15 @@ public class FuncionarioView {
                     break;
 
                 case 6:
-                    // Verificar trabalho de funcionário por nome (a implementar)
-                    System.out.println("Funcionalidade não implementada.");
+                	System.out.print("Digite o id do funcionario que vc quer visualizar: ");
+                    int idFuncionarioVerificar = scanner.nextInt();
+                    funcionarioController.getProdutosAdicionadosPeloFuncionario_id(idFuncionarioVerificar);
+                    break;
+                
+                case 7:
+                	ProdutoController produtoController = new ProdutoController();
+                	ProdutoView produtoView = new ProdutoView(produtoController);
+                	produtoView.exibirMenuGerente(funcionario);
                     break;
 
                 case 0:
@@ -141,7 +171,7 @@ public class FuncionarioView {
         int opcao;
         do {
             System.out.println("\n--- MENU FUNCIONÁRIOS Peão (Funcionário) ---");
-            System.out.println("1 - Trabalhar"); // Funcionalidade a implementar
+            System.out.println("1 - Trabalhar"); 
             System.out.println("2 - Listar Produtos que eu adicionei"); 
             System.out.println("3 - Atualizar Informações");
             System.out.println("4 - Me demitir");
@@ -149,11 +179,13 @@ public class FuncionarioView {
             System.out.print("Escolha uma opção: ");
 
             opcao = scanner.nextInt();
-            scanner.nextLine(); // Consumir quebra de linha
+            scanner.nextLine(); 
 
             switch (opcao) {
                 case 1:
-                    System.out.println("Funcionalidade 'Trabalhar' não implementada.");
+                	ProdutoController produtoController = new ProdutoController();
+                	ProdutoView produtoView = new ProdutoView(produtoController);
+                	produtoView.exibirMenuFuncionario(funcionario);
                     break;
 
                 case 2:

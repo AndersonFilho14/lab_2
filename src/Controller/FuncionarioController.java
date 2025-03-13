@@ -110,7 +110,7 @@ public class FuncionarioController {
     public void demitirFuncionario(String nome) {
     	try {
     		funcionarioDao.demitirFuncionarioPorNome(nome); 
-    		System.out.println("Funcionário demitido com sucesso!");
+    		System.out.println("Funcionário ,"+nome+ " , demitido com sucesso!");
     	} catch(SQLException e) {
     		System.err.println("Erro ao realizar demissão: " + e.getMessage());
     	}
@@ -124,7 +124,7 @@ public class FuncionarioController {
     public void empregarFuncionario(String nome){
     	try {
     		funcionarioDao.empregarFuncionarioPorNome(nome); 
-    		System.out.println("Funcionário contratado com sucesso!");
+    		System.out.println("Funcionário, " + nome+", contratado com sucesso!");
     	} catch(SQLException e) {
     		System.err.println("Erro ao realizar contratação: " + e.getMessage());
     	}
@@ -157,5 +157,20 @@ public class FuncionarioController {
 	            System.out.println(produto);
 	           }
     	}
+    }
+    
+    /**
+     * Busca um funcionário pelo seu ID.
+     * 
+     * @param id ID do funcionário.
+     * @return O objeto Funcionario correspondente ou null se não encontrado.
+     */
+    public Funcionario buscarFuncionarioPorId(int id) {
+        try {
+            return funcionarioDao.buscarFuncionarioPorId(id);
+        } catch (SQLException e) {
+            System.err.println("Erro ao buscar funcionário por id: " + e.getMessage());
+            return null;
+        }
     }
 }

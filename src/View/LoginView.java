@@ -131,7 +131,7 @@ public class LoginView {
                 funcionarioView.exibirMenuFuncionario(funcionario);
             } else {
                 System.out.println("Bem-vindo, Gerente " + funcionario.getNome() + " .");
-                funcionarioView.exibirMenuGerente();
+                funcionarioView.exibirMenuGerente(funcionario);
             }
         } else {
             System.out.println("Email ou senha incorretos.");

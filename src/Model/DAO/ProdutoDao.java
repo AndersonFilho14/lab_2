@@ -123,6 +123,31 @@ public class ProdutoDao {
         }
         return null;
     }
+    
+    
+    public Produto buscarProdutoPorId(int id) {
+        String sql = "SELECT * FROM produtos WHERE id_produtos = ?";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return new Produto(
+                    rs.getInt("id_produtos"),
+                    rs.getString("nome_produto"),
+                    rs.getDate("validade_produto").toString(),
+                    rs.getFloat("preco_produto"),
+                    Categoria.valueOf(rs.getString("categoria_produto").toUpperCase()),
+                    rs.getInt("estoque_produto"),
+                    rs.getBoolean("prateleira")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     // Diminui a quantidade do produto
     public void subtrairQuantidade(int id, int quantidade) {

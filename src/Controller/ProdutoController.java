@@ -41,8 +41,8 @@ public class ProdutoController {
         return produtoDao.buscarProdutoPorNome(nome);
     }
     
-    public Produto buscarProdutoPorId(int id) {
-        return produtoDao.buscarProdutoPorId(id);
+    public Produto buscarProdutoPorId(String nome) {
+        return produtoDao.buscarProdutoPorNome(nome);
     }    
     
     public void comprarProduto(int id, int quantidade) {
