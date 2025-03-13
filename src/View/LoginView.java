@@ -37,7 +37,7 @@ public class LoginView {
             System.out.println("5 - Sair");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
-            scanner.nextLine(); // Consumir a quebra de linha após a escolha
+            scanner.nextLine(); 
 
             switch (opcao) {
                 case 1:

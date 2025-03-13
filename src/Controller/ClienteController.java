@@ -59,7 +59,7 @@ public class ClienteController {
 
     public Cliente consultarClientePorId(int id) {
         try {
-            return clienteDao.consultarClientePorId(id); // Consultar por ID no banco
+            return clienteDao.consultarClientePorId(id); 
         } catch (SQLException e) {
             System.err.println("Erro ao consultar cliente: " + e.getMessage());
             return null;
