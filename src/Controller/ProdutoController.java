@@ -41,8 +41,8 @@ public class ProdutoController {
         return produtoDao.buscarProdutoPorNome(nome);
     }
     
-    public Produto buscarProdutoPorId(String nome) {
-        return produtoDao.buscarProdutoPorNome(nome);
+    public Produto buscarProdutoPorId(int id) {
+        return produtoDao.buscarProdutoPorId(id);
     }    
     
     public void comprarProduto(int id, int quantidade) {
@@ -69,7 +69,10 @@ public class ProdutoController {
         return produtoDao.validadeProxima(dias);
     }
     
-    
+    public List<Produto> listarProdutosNaPrateleira() {
+        return produtoDao.listarProdutosNaPrateleira();
+    }
+
     
 }
 

@@ -267,5 +267,31 @@ public class ProdutoDao {
         return produtos;
     }
     
+    public List<Produto> listarProdutosNaPrateleira() {
+        List<Produto> produtos = new ArrayList<>();
+        String sql = "SELECT * FROM produtos WHERE prateleira = true";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Produto produto = new Produto(
+                    rs.getInt("id_produtos"),
+                    rs.getString("nome_produto"),
+                    rs.getDate("validade_produto").toString(),
+                    rs.getFloat("preco_produto"),
+                    Categoria.valueOf(rs.getString("categoria_produto").toUpperCase()),
+                    rs.getInt("estoque_produto"),
+                    rs.getBoolean("prateleira")
+                );
+                produtos.add(produto);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return produtos;
+    }
+
+    
 }
 

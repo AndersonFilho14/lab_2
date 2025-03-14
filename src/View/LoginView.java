@@ -1,15 +1,19 @@
 package View;
 
+import Controller.CarrinhoController;
 import Controller.ClienteController;
 import Controller.FuncionarioController;
+import Controller.ProdutoController;
+import Model.Carrinho;
 import Model.Cliente;
 import Model.Funcionario;
 
-import java.util.Scanner;
+import java.util.Scanner;import com.mysql.cj.jdbc.result.CachedResultSetMetaDataImpl;
 
 public class LoginView {
     private ClienteController clienteController;
     private FuncionarioController funcionarioController;
+    private ProdutoController produtoController;
     private Scanner scanner;
     private FuncionarioView funcionarioView;
 
@@ -17,6 +21,7 @@ public class LoginView {
     public LoginView() {
         this.clienteController = new ClienteController();
         this.funcionarioController = new FuncionarioController();
+        this.produtoController = new ProdutoController();
         this.scanner = new Scanner(System.in);
         this.funcionarioView = new FuncionarioView(funcionarioController);
     }
@@ -74,7 +79,11 @@ public class LoginView {
         Cliente cliente = clienteController.verificarLogin(email, senha);
         if (cliente != null) {
             System.out.println("Bem-vindo, " + cliente.getNome() + "!");
-            //tela de compras futura	que recebe o nome do cliente
+            Carrinho carrinho = new Carrinho();
+            
+            CarrinhoController carrinhoController = new CarrinhoController(carrinho, this.produtoController);
+            CompraView compraView = new CompraView(carrinhoController);
+            compraView.exibirMenuCompras();
         } else {
             System.out.println("E-mail ou senha incorretos.");
         }
