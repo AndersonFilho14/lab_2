@@ -76,6 +76,7 @@ public class ProdutoView {
             System.out.println("4 - Colocar na Prateleira");
             System.out.println("5 - Retirar da Prateleira");
             System.out.println("6 - Verificar Produtos Próximos da Validade");
+            System.out.println("7 - Colocar mais produtos no estoque");
             System.out.println("0 - Sair");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
@@ -100,6 +101,8 @@ public class ProdutoView {
                 case 6:
                 	verificarProdutosProximosValidade();
                     break;
+                case 7:
+                	aumentarQuantidadeProduto();
                 case 0:
                     System.out.println("Saindo...");
                     break;
@@ -150,16 +153,14 @@ public class ProdutoView {
         System.out.print("Digite o nome do produto a ser editado: ");
         String nomeProduto = scanner.nextLine();
         Produto produtoExistente = produtoController.buscarProdutoPorNome(nomeProduto);
-
+        
         if (produtoExistente != null) {
             System.out.println("\nEditando Produto: "+ produtoExistente.getNome());
-
             System.out.print("Digite o novo nome do produto (ou pressione Enter para manter o atual): ");
             String nome = scanner.nextLine();
             if (!nome.isEmpty()) {
                 produtoExistente.setNome(nome);
             }
-
             System.out.print("Digite a nova validade do produto (yyyy-MM-dd) (ou pressione Enter para manter a atual): ");
             String validade = scanner.nextLine();
             if (!validade.isEmpty()) {
@@ -186,7 +187,33 @@ public class ProdutoView {
             System.out.println("Produto não encontrado.");
         }
     }
+    
+    
+    private void aumentarQuantidadeProduto() {
+        System.out.print("Digite o id do produto para aumentar a quantidade no estoque: ");
+        int id = scanner.nextInt();
+        Produto produtoExistente = produtoController.buscarProdutoPorId(id);
 
+        if (produtoExistente != null) {
+            System.out.println("\nProduto encontrado: " + produtoExistente.getNome());
+            System.out.print("Digite a quantidade a ser adicionada ao estoque: ");
+            int quantidadeAAdicionar = scanner.nextInt();
+            scanner.nextLine();
+
+            if (quantidadeAAdicionar > 0) {
+                int novaQuantidade = produtoExistente.getQuantidade() + quantidadeAAdicionar;
+                produtoExistente.setQuantidade(novaQuantidade);
+                produtoController.atualizarProduto(produtoExistente);
+                System.out.println("Quantidade aumentada com sucesso! Novo estoque: " + novaQuantidade);
+            } else {
+                System.out.println("A quantidade a ser adicionada deve ser maior que zero.");
+            }
+        } else {
+            System.out.println("Produto não encontrado.");
+        }
+    }
+    
+    
     private void removerProduto() {
         System.out.print("Digite o nome do produto a ser removido: ");
         String nomeProduto = scanner.nextLine();

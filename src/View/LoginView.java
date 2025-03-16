@@ -39,7 +39,7 @@ public class LoginView {
             System.out.println("2 - Entrar como cliente sem cadastro");
             System.out.println("3 - Criar login");
             System.out.println("4 - Acessar como Funcionário");
-            System.out.println("5 - Sair");
+            System.out.println("0 - Sair");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
             scanner.nextLine(); 
@@ -57,7 +57,7 @@ public class LoginView {
                 case 4:
                     acessarComoFuncionario();
                     break;
-                case 5:
+                case 0:
                     System.out.println("Saindo...");
                     break;
                 default:
@@ -91,11 +91,14 @@ public class LoginView {
 
 
     /**
-     * Futuro processo de login para um cliente sem cadastro, direcionando-o para a tela de cadastro.
+     * Cliente sem cadastro, setado para ser o cliente de id '1'
      */
     private void entrarComoClienteSemCadastro() {
-        System.out.println("\nVocê será redirecionado para a tela de compras...");
-        // vai direto as compras
+    	Cliente cliente = clienteController.verificarLogin("@", "senha123");
+        Carrinho carrinho = new Carrinho();
+        CarrinhoController carrinhoController = new CarrinhoController(carrinho, this.produtoController);
+        CompraView compraView = new CompraView(carrinhoController);
+        compraView.exibirMenuCompras(cliente.getId()); 
     }
 
     /**
