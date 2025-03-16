@@ -154,8 +154,8 @@ public class ProdutoDao {
         String sql = "UPDATE produtos SET estoque_produto = estoque_produto - ? WHERE id_produtos = ?";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, quantidade); // Subtrai a quantidade do estoque
-            stmt.setInt(2, id); // Define qual produto será atualizado
+            stmt.setInt(1, quantidade);
+            stmt.setInt(2, id); 
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

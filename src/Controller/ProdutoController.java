@@ -49,9 +49,8 @@ public class ProdutoController {
         Produto produto = produtoDao.buscarProdutoPorId(id);
         if (produto != null && produto.getQuantidade() >= quantidade) {
             produtoDao.subtrairQuantidade(id, quantidade);
-            System.out.println("Compra realizada com sucesso!");
         } else {
-            System.out.println("Quantidade insuficiente em estoque do produto"+ produto.getNome());
+            System.out.println("Quantidade insuficiente em estoque do produto "+ produto.getNome());
         }
     }
     

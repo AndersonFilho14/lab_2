@@ -83,7 +83,7 @@ public class LoginView {
             
             CarrinhoController carrinhoController = new CarrinhoController(carrinho, this.produtoController);
             CompraView compraView = new CompraView(carrinhoController);
-            compraView.exibirMenuCompras();
+            compraView.exibirMenuCompras(cliente.getId());
         } else {
             System.out.println("E-mail ou senha incorretos.");
         }

@@ -7,10 +7,12 @@ import Model.Produto;
 public class CarrinhoController {
     private Carrinho carrinho;
     private ProdutoController produtoController;
+    private FinanceiroController financeiroController;
 
     public CarrinhoController(Carrinho carrinho, ProdutoController produtoController) {
         this.carrinho = carrinho;
         this.produtoController = produtoController;
+        this.financeiroController = new FinanceiroController();
     }
 
     
@@ -71,4 +73,30 @@ public class CarrinhoController {
     public double calcularTotal() {
         return carrinho.calcularTotal();
     }
+    
+    public String finalizarCompra(int idCliente) {
+        double total = calcularTotal();
+        
+        if (carrinho.getItens().isEmpty()) {
+            return "O carrinho está vazio. Adicione produtos antes de finalizar a compra.";
+        }
+        if (total <= 0) {
+            return "Erro ao calcular total da compra.";
+        }
+        boolean sucesso = financeiroController.registrarCompra(total, idCliente);
+        if (!sucesso) {
+            return "Erro ao registrar compra no financeiro.";
+        }
+        //  produtos comprados
+        for (Map.Entry<Produto, Integer> entry : carrinho.getItens().entrySet()) {
+            Produto produto = entry.getKey();
+            int quantidadeComprada = entry.getValue();
+            produtoController.comprarProduto(produto.getId(), quantidadeComprada);
+        }
+        carrinho.getItens().clear();
+        return "Compra finalizada com sucesso!";
+    }
+    
+    
+    
 }
