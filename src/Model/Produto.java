@@ -65,5 +65,18 @@ public class Produto {
 				+ categoria + ", quantidade=" + quantidade + ", prateleira=" + prateleira + "]";
 	}
     
+	@Override
+	public boolean equals(Object obj) {
+	    if (this == obj) return true;
+	    if (obj == null || getClass() != obj.getClass()) return false;
+	    Produto produto = (Produto) obj;
+	    return id == produto.id; // Comparação pelo ID do produto
+	}
+
+	@Override
+	public int hashCode() {
+	    return Integer.hashCode(id);
+	}
+
     
 }

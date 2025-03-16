@@ -31,11 +31,17 @@ public class CarrinhoController {
 
     
     public String removerProduto(int id) {
-        Produto produto = produtoController.buscarProdutoPorId(id); // Vc não deveria retirar isso do banco??
-        if (produto == null || !carrinho.getItens().containsKey(produto)) {
+        Produto produtoRemover = null;
+        for (Produto p : carrinho.getItens().keySet()) {
+            if (p.getId() == id) {
+                produtoRemover = p;
+                break;
+            }
+        }
+        if (produtoRemover == null) {
             return "Produto não encontrado no carrinho.";
-        }        
-        carrinho.removerProduto(produto);
+        }
+        carrinho.removerProduto(produtoRemover);
         return "Produto removido do carrinho!";
     }
 
