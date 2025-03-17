@@ -49,4 +49,5 @@ public class Cliente extends Pessoa {
         }
         this.pontosFidelidade -= pontos;
     }
+
 }

@@ -122,6 +122,7 @@ public class ClienteDao {
                         rs.getString("telefone")
                     );
                     cliente.setId(rs.getInt("id"));
+                    cliente.setPontosFidelidade(rs.getInt("pontos_fidelidade"));
                     return cliente;
                 }
             }

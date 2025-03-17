@@ -14,7 +14,7 @@ public class FinanceiroController {
     
   
     public boolean registrarCompra(double valorCompra, int idCliente){
-        if (valorCompra <= 0) {
+        if (valorCompra < 0) {
             System.out.println("Erro: O valor da compra deve ser maior que zero.");
             return false;
         }

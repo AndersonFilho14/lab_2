@@ -1,7 +1,10 @@
 package Controller;
 
 import java.util.Map;
+import java.util.Scanner;
+
 import Model.Carrinho;
+import Model.Cliente;
 import Model.Produto;
 
 public class CarrinhoController {
@@ -76,27 +79,65 @@ public class CarrinhoController {
     
     public String finalizarCompra(int idCliente) {
         double total = calcularTotal();
-        
+
         if (carrinho.getItens().isEmpty()) {
             return "O carrinho está vazio. Adicione produtos antes de finalizar a compra.";
         }
         if (total <= 0) {
             return "Erro ao calcular total da compra.";
         }
+
+        ClienteController clienteController = new ClienteController();
+        Cliente cliente = clienteController.consultarClientePorId(idCliente);
+        System.out.println("pontos fidelidade  "+ cliente.getPontosFidelidade() + "  Nome = " + cliente.getNome() + "  id  " + cliente.getId());
+        
+        if (cliente.getId() != 1 && cliente.getPontosFidelidade() > 0) {
+            System.out.println("Deseja usar seus pontos fidelidade? Você tem " + cliente.getPontosFidelidade() + " pontos disponíveis.");
+            System.out.println("Digite ( S ) para confirmar ou qualquer outra coisa para não usar os pontos.");
+
+            boolean usarPontos = false;
+            try (Scanner scanner = new Scanner(System.in)) {
+                String resposta = scanner.nextLine().trim().toUpperCase();
+                if (resposta.equals("S")) {
+                    usarPontos = true;
+                }
+            } catch (Exception e) {
+                System.out.println("Erro ao ler a entrada. Nenhum ponto será usado.");
+            }
+
+            if (usarPontos) {
+                if (cliente.getPontosFidelidade() < total) {
+                    total -= cliente.getPontosFidelidade();
+                    clienteController.removerPontosFidelidade(idCliente, cliente.getPontosFidelidade());
+                    System.out.println("O valor total da compra agora é "+ total + ". Vc usou "+ cliente.getPontosFidelidade());
+                } else {
+                    int pontosTotal = (int) Math.floor(total); 
+                    clienteController.removerPontosFidelidade(idCliente, pontosTotal);
+                    total = 0;
+                    System.out.println("Boa vc juntou pontos fidelidades suficientes para sua compra sair grátis");
+                }
+            }
+        }
+
         boolean sucesso = financeiroController.registrarCompra(total, idCliente);
         if (!sucesso) {
             return "Erro ao registrar compra no financeiro.";
         }
-        //  produtos comprados
+
         for (Map.Entry<Produto, Integer> entry : carrinho.getItens().entrySet()) {
             Produto produto = entry.getKey();
             int quantidadeComprada = entry.getValue();
             produtoController.comprarProduto(produto.getId(), quantidadeComprada);
         }
         carrinho.getItens().clear();
+
+        if (cliente.getId() != 1) {
+            int pontosFidelidade = (int) Math.floor(total * 0.01); 
+            clienteController.adicionarPontosFidelidade(cliente.getId(), pontosFidelidade);
+        }
+
         return "Compra finalizada com sucesso!";
     }
-    
     
     
 }
