@@ -1,5 +1,6 @@
 package View;
 
+import Controller.FinanceiroController;
 import Controller.FuncionarioController;
 import Controller.ProdutoController;
 import Model.Funcionario;
@@ -10,30 +11,41 @@ import java.util.Scanner;
 
 public class FuncionarioView {
     private Scanner scanner;
+    private FinanceiroController financeiroController;
     private FuncionarioController funcionarioController;
 
     public FuncionarioView(FuncionarioController funcionarioController) {
         this.funcionarioController = funcionarioController;
+        this.financeiroController = new FinanceiroController();
         this.scanner = new Scanner(System.in);
     }
 
     // ===== MENU GERENTE =====
     public void exibirMenuGerente(Funcionario funcionario) {
-        int opcao;
+        int opcao = 1 ;
         do {
-            System.out.println("\n--- MENU FUNCIONÁRIOS Peão PLus (Gerente) ---"); 
+            System.out.println("\n--- MENU FUNCIONÁRIOS Peão PLus (Gerente) ---");
             System.out.println("1 - Adicionar Funcionário");
             System.out.println("2 - Listar Funcionários");
             System.out.println("3 - Atualizar Funcionário");
             System.out.println("4 - Demitir / Recontratar Funcionário");
             System.out.println("5 - Promover / Despromover Funcionário");
             System.out.println("6 - Verificar trabalho de funcionário por id");
-            System.out.println("7 - Menu de gerente para Produtos"); 
+            System.out.println("7 - Menu de gerente para Produtos");
+            System.out.println("8 - Relatório geral");
+            System.out.println("9 - Gerar Relatório personalizado");
             System.out.println("0 - Sair");
             System.out.print("Escolha uma opção: ");
 
+
+            if (!scanner.hasNextInt()) {
+                System.out.println("Entrada inválida! Por favor, digite um número.");
+                scanner.next(); 
+                continue; 
+            }
+
             opcao = scanner.nextInt();
-            scanner.nextLine(); 
+            scanner.nextLine();
 
             switch (opcao) {
                 case 1:
@@ -49,6 +61,12 @@ public class FuncionarioView {
                     System.out.print("Telefone: ");
                     String telefone = scanner.nextLine();
                     System.out.print("Cargo (número): ");
+                    if (!scanner.hasNextInt()) {
+                        System.out.println("Entrada inválida! O cargo deve ser um número.");
+                        scanner.next(); // limpa a entrada inválida
+                        break;
+                    }
+                    
                     int cargo = scanner.nextInt();
                     scanner.nextLine(); 
 
@@ -61,6 +79,7 @@ public class FuncionarioView {
                     if (funcionarios == null || funcionarios.isEmpty()) {
                         System.out.println("Nenhum funcionário cadastrado.");
                     } else {
+                    	System.out.println("");
                         for (Funcionario f : funcionarios) {
                             System.out.println("ID: " + f.getId() 
                             		+	" | Nome: " + f.getNome() 
@@ -121,6 +140,11 @@ public class FuncionarioView {
                     System.out.print("Digite o nome do funcionário: ");
                     String nomeFunc = scanner.nextLine();
                     System.out.print("Digite 1 para demitir ou 2 para recontratar: ");
+                    if (!scanner.hasNextInt()) {
+                        System.out.println("Entrada inválida! Digite 1 ou 2.");
+                        scanner.next(); 
+                        break;
+                    }
                     int escolha = scanner.nextInt();
                     scanner.nextLine();
 
@@ -155,7 +179,30 @@ public class FuncionarioView {
                 	ProdutoView produtoView = new ProdutoView(produtoController);
                 	produtoView.exibirMenuGerente(funcionario);
                     break;
+                
+                case 8:
+                	financeiroController.listarCompras();
+                	break;
+                
+                case 9:
+                	System.out.println("Digite o número de dias para o relatório (apenas valores positivos):");
 
+                    if (!scanner.hasNextInt()) { 
+                        System.out.println("Entrada inválida! Digite um número inteiro positivo.");
+                        scanner.next(); 
+                        break; 
+                    }
+
+                    int dias = scanner.nextInt();
+
+                    if (dias <= 0) { 
+                        System.out.println("Por favor, insira um número maior que zero.");
+                        break;
+                    }
+
+                    financeiroController.listarComprasUltimosDias(dias);
+                    break;
+                    
                 case 0:
                     System.out.println("Saindo do menu de gerente...");
                     break;
@@ -168,7 +215,7 @@ public class FuncionarioView {
 
     // ===== MENU FUNCIONÁRIO =====
     public void exibirMenuFuncionario(Funcionario funcionario) {
-        int opcao;
+    	int opcao = 1 ;
         do {
             System.out.println("\n--- MENU FUNCIONÁRIOS Peão (Funcionário) ---");
             System.out.println("1 - Trabalhar"); 
@@ -177,7 +224,12 @@ public class FuncionarioView {
             System.out.println("4 - Me demitir");
             System.out.println("0 - Sair");
             System.out.print("Escolha uma opção: ");
-
+            
+            if (!scanner.hasNextInt()) {
+                System.out.println("Entrada inválida! Por favor, digite um número.");
+                scanner.next(); 
+                continue; 
+            }
             opcao = scanner.nextInt();
             scanner.nextLine(); 
 

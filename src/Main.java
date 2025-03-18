@@ -6,6 +6,7 @@ import Controller.ClienteController;
 import Controller.ProdutoController;
 import Model.Categoria;
 import Model.Cliente;
+import Model.Funcionario;
 import Model.Produto;
 import Model.DAO.ClienteDao;
 import Model.DAO.ProdutoDao;
@@ -21,29 +22,25 @@ public class Main {
 
 	public static void main(String[] args) {
 //		
-LoginView loginView = new LoginView();
-loginView.exibirMenu();
+//LoginView loginView = new LoginView();
+//loginView.exibirMenu();
 
-//ClienteController clienteController = new ClienteController();
-//ClienteView clienteView = new ClienteView(clienteController);
-//clienteView.exibirMenu();
-//
+// 			Testes
+// CLiente
+
+// FUncionario
 //FuncionarioController funcionarioController = new FuncionarioController();
 //FuncionarioView funcionarioView = new FuncionarioView(funcionarioController);
-//funcionarioView.exibirMenuGerente();
-        // Exibindo o produto
-//		ProdutoController produtoController = new ProdutoController();
-//		ProdutoView produtoView = new ProdutoView(produtoController);
-//		produtoView.exibirMenu();
-//		ProdutoView pv = new ProdutoView(produtoController);
-//		pv.exibirMenu();
+//Funcionario funcionario =  funcionarioController.loginFuncionario("marcio@email.com", "mercado123"); // funcionario
+//Funcionario gerente =  funcionarioController.loginFuncionario("gerente@email.com", "mercado123"); // gerente
+//funcionarioView.exibirMenuGerente(gerente);
 
-//		ProdutoDao produtoDao = new ProdutoDao();
-//		List<Produto> vencendo =  produtoDao.validadeProxima(x );
-//		if (vencendo.isEmpty()) {
-//			System.out.println("Não tem produtos vencendo nos " + x + " dias");
-//		} else {
-//		System.out.println(vencendo);
+//  Produto
+
+// Compra
+
+// Login
+//	Não é preciso
 
 	}
 }
