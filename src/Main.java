@@ -29,11 +29,12 @@ public class Main {
 // CLiente
 
 // FUncionario
-//FuncionarioController funcionarioController = new FuncionarioController();
-//FuncionarioView funcionarioView = new FuncionarioView(funcionarioController);
-//Funcionario funcionario =  funcionarioController.loginFuncionario("marcio@email.com", "mercado123"); // funcionario
-//Funcionario gerente =  funcionarioController.loginFuncionario("gerente@email.com", "mercado123"); // gerente
-//funcionarioView.exibirMenuGerente(gerente);
+FuncionarioController funcionarioController = new FuncionarioController();
+FuncionarioView funcionarioView = new FuncionarioView(funcionarioController);
+Funcionario funcionario =  funcionarioController.loginFuncionario("marcio@email.com", "mercado123"); // funcionario
+Funcionario gerente =  funcionarioController.loginFuncionario("gerente@email.com", "mercado123"); // gerente
+funcionarioView.exibirMenuGerente(gerente);
+funcionarioView.exibirMenuFuncionario(funcionario);
 
 //  Produto
 

@@ -10,16 +10,40 @@ import java.util.List;
  * A classe ClienteDao é responsável pela interação com o banco de dados para realizar operações CRUD (Create, Read, Update, Delete)
  * relacionadas ao cliente, além de gerenciar pontos de fidelidade.
  */
-public class ClienteDao {
+public class ClienteDao implements DAO<Cliente>{
     private Connection conn;
 
     
     public ClienteDao() {
         try {
-            this.conn = ConnectionFactory.createdConnectionToMySQL(); // Conectar ao banco de dados
+            this.conn = ConnectionFactory.createdConnectionToMySQL(); 
         } catch (SQLException e) {
             e.printStackTrace();
             this.conn = null; 
+        }
+    }
+    
+    @Override
+    public void create(Cliente entity) throws SQLException {
+        cadastrarCliente(entity); 
+    }
+
+    @Override
+    public List<Cliente> readAll() throws SQLException {
+        return listarClientes(); 
+    }
+
+    @Override
+    public void update(Cliente entity) throws SQLException {
+        atualizarCliente(entity); 
+    }
+
+    @Override
+    public void delete(int id) throws SQLException {
+        String sql = "DELETE FROM clientes WHERE id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
         }
     }
     
@@ -51,7 +75,7 @@ public class ClienteDao {
                 }
             }
         }
-        return null; // Retorna null se não encontrar o cliente
+        return null; 
     }
     
     

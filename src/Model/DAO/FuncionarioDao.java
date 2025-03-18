@@ -7,12 +7,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FuncionarioDao {
+public class FuncionarioDao implements DAO<Funcionario>{
     private Connection conn;
 
-    /**
-     * Construtor que inicializa a conexão com o banco de dados.
-     */
+
     public FuncionarioDao() {
         try {
             this.conn = ConnectionFactory.createdConnectionToMySQL(); // Conectar ao banco de dados
@@ -21,7 +19,27 @@ public class FuncionarioDao {
             this.conn = null;
         }
     }
+    
+    @Override
+    public void create(Funcionario entity) throws SQLException {
+        adicionar(entity); 
+    }
 
+    @Override
+    public List<Funcionario> readAll() throws SQLException {
+        return listar(); 
+    }
+
+    @Override
+    public void update(Funcionario entity) throws SQLException {
+        atualizar(entity, entity.getId()); 
+    }
+
+    @Override
+    public void delete(int id) throws SQLException {
+        deletar(id); 
+    }
+    
     /**
      * Consulta um funcionário no banco de dados utilizando o email e senha fornecidos.
      * 
