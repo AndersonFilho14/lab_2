@@ -20,7 +20,7 @@ public class ProdutoView {
     }
 
     public void exibirMenuGerente(Funcionario funcionario) {
-        int opcao;
+        int opcao= 1;
         do {
             System.out.println("\nMenu de Produtos Gerente:");
             System.out.println("1 - Adicionar Produto");
@@ -32,6 +32,12 @@ public class ProdutoView {
             System.out.println("7 - Verificar Produtos Próximos da Validade");
             System.out.println("0 - Sair");
             System.out.print("Escolha uma opção: ");
+            
+            if (!scanner.hasNextInt()) {
+                System.out.println("Entrada inválida! Por favor, digite um número.");
+                scanner.next(); 
+                continue; 
+            }
             opcao = scanner.nextInt();
             scanner.nextLine();
 
@@ -67,7 +73,7 @@ public class ProdutoView {
     }
 
     public void exibirMenuFuncionario(Funcionario funcionario) {
-        int opcao;
+        int opcao = 1;
         do {
             System.out.println("\nMenu de Produtos Funcionario:");
             System.out.println("1 - Adicionar Produto");
@@ -79,6 +85,12 @@ public class ProdutoView {
             System.out.println("7 - Colocar mais produtos no estoque");
             System.out.println("0 - Sair");
             System.out.print("Escolha uma opção: ");
+            
+            if (!scanner.hasNextInt()) {
+                System.out.println("Entrada inválida! Por favor, digite um número.");
+                scanner.next(); 
+                continue; 
+            }
             opcao = scanner.nextInt();
             scanner.nextLine();
 
@@ -137,7 +149,6 @@ public class ProdutoView {
         scanner.nextLine();
 
         produtoController.adicionarProduto(nome, validade, preco, categoria, quantidade, funcionario.getId()); 
-        System.out.println("Produto cadastrado com sucesso!");
     }
 
     private Categoria obterCategoria(int categoriaEscolhida) {
@@ -182,7 +193,6 @@ public class ProdutoView {
             }
 
             produtoController.atualizarProduto(produtoExistente);
-            System.out.println("Produto editado com sucesso!");
         } else {
             System.out.println("Produto não encontrado.");
         }
@@ -243,7 +253,6 @@ public class ProdutoView {
         int id = scanner.nextInt();
         scanner.nextLine(); 
         produtoController.colocarNaPrateleira(id);
-        System.out.println("Produto colocado na prateleira com sucesso!");
     }
 
     private void retirarDaPrateleira() {
@@ -251,7 +260,6 @@ public class ProdutoView {
         int id = scanner.nextInt();
         scanner.nextLine(); 
         produtoController.retirarDaPrateleira(id);
-        System.out.println("Produto retirado da prateleira com sucesso!");
     }
 
     private void verificarProdutosProximosValidade() {

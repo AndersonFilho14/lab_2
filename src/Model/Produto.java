@@ -59,11 +59,11 @@ public class Produto {
     public boolean isPrateleira() { return prateleira; }
     public void setPrateleira(boolean prateleira) { this.prateleira = prateleira; }
 
-	@Override
-	public String toString() {
-		return "Produto [id=" + id + ", nome=" + nome + ", validade=" + validade + ", preco=" + preco + ", categoria="
-				+ categoria + ", quantidade=" + quantidade + ", prateleira=" + prateleira + "]";
-	}
+    @Override
+    public String toString() {
+        return getId() + " | " + getNome() + " | " + getCategoria() + " | Preço: " + getPreco() + " | Quantidade no estoque: " + getQuantidade() + " |  Na prateleira: " + isPrateleira();
+    }
+
     
 	@Override
 	public boolean equals(Object obj) {
