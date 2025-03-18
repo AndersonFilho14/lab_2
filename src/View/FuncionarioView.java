@@ -1,5 +1,6 @@
 package View;
 
+import Controller.ClienteController;
 import Controller.FinanceiroController;
 import Controller.FuncionarioController;
 import Controller.ProdutoController;
@@ -32,8 +33,9 @@ public class FuncionarioView {
             System.out.println("5 - Promover / Despromover Funcionário");
             System.out.println("6 - Verificar trabalho de funcionário por id");
             System.out.println("7 - Menu de gerente para Produtos");
-            System.out.println("8 - Relatório geral");
-            System.out.println("9 - Gerar Relatório personalizado");
+            System.out.println("8 - Menu de gerente para CLientes");
+            System.out.println("9 - Relatório geral");
+            System.out.println("10 - Gerar Relatório personalizado");
             System.out.println("0 - Sair");
             System.out.print("Escolha uma opção: ");
 
@@ -180,11 +182,18 @@ public class FuncionarioView {
                 	produtoView.exibirMenuGerente(funcionario);
                     break;
                 
+                
                 case 8:
-                	financeiroController.listarCompras();
+                	ClienteController clienteController = new ClienteController();
+                	ClienteView clienteView = new ClienteView(clienteController);
+                	clienteView.exibirMenu();
                 	break;
                 
                 case 9:
+                	financeiroController.listarCompras();
+                	break;
+                
+                case 10:
                 	System.out.println("Digite o número de dias para o relatório (apenas valores positivos):");
 
                     if (!scanner.hasNextInt()) { 
@@ -192,14 +201,12 @@ public class FuncionarioView {
                         scanner.next(); 
                         break; 
                     }
-
+                    
                     int dias = scanner.nextInt();
-
                     if (dias <= 0) { 
                         System.out.println("Por favor, insira um número maior que zero.");
                         break;
                     }
-
                     financeiroController.listarComprasUltimosDias(dias);
                     break;
                     

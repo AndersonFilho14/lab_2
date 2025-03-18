@@ -118,6 +118,7 @@ public class ClienteDao implements DAO<Cliente>{
                     rs.getString("telefone")
                 );
                 cliente.setId(rs.getInt("id"));
+                cliente.setPontosFidelidade(rs.getInt("pontos_fidelidade"));
                 clientes.add(cliente);
             }
         }

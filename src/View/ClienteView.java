@@ -28,7 +28,7 @@ public class ClienteView {
      * O menu continua sendo exibido até que o usuário escolha sair.
      */
     public void exibirMenu() {
-    	int opcao;
+    	int opcao = 1;
         do {
             System.out.println("\nMenu de Clientes:");
             System.out.println("1 - Cadastrar Cliente");
@@ -40,6 +40,12 @@ public class ClienteView {
             System.out.println("7 - Remover Pontos de Fidelidade");
             System.out.println("8 - Sair");
             System.out.print("Escolha uma opção: ");
+            
+            if (!scanner.hasNextInt()) {
+                System.out.println("Entrada inválida! Por favor, digite um número.");
+                scanner.next(); // Limpar a entrada inválida
+                continue; // Voltar para o início do loop
+            }
             opcao = scanner.nextInt();
             scanner.nextLine(); // Consumir a quebra de linha após a escolha
 

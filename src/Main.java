@@ -21,27 +21,29 @@ import View.FuncionarioView;
 public class Main {
 
 	public static void main(String[] args) {
-//		
+//	    ------ Projeto Principal ------
 //LoginView loginView = new LoginView();
 //loginView.exibirMenu();
 
-// 			Testes
-// CLiente
+// ======  Testes  ======   
+// ------ CLiente  ------
+//ClienteController clienteController = new ClienteController();
+//ClienteView clienteView = new ClienteView(clienteController);
+//clienteView.exibirMenu();
 
-// FUncionario
+// ------ FUncionario ------
 FuncionarioController funcionarioController = new FuncionarioController();
 FuncionarioView funcionarioView = new FuncionarioView(funcionarioController);
 Funcionario funcionario =  funcionarioController.loginFuncionario("marcio@email.com", "mercado123"); // funcionario
 Funcionario gerente =  funcionarioController.loginFuncionario("gerente@email.com", "mercado123"); // gerente
 funcionarioView.exibirMenuGerente(gerente);
-funcionarioView.exibirMenuFuncionario(funcionario);
+//funcionarioView.exibirMenuFuncionario(funcionario);
 
-//  Produto
+//  ------ Produto  ------
 
-// Compra
+// ------  Compra  ------
 
-// Login
-//	Não é preciso
+
 
 	}
 }
