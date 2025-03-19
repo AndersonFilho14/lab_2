@@ -56,9 +56,10 @@ public class ProdutoDao {
                     rs.getString("nome_produto"),
                     rs.getDate("validade_produto").toString(),
                     rs.getFloat("preco_produto"),
-                    Categoria.valueOf(rs.getString("categoria_produto").toUpperCase()), // Garante compatibilidade
+                    Categoria.valueOf(rs.getString("categoria_produto").toUpperCase()), 
                     rs.getInt("estoque_produto"),
-                    rs.getBoolean("prateleira")
+                    rs.getBoolean("prateleira"),
+                    rs.getInt("id_funcionario")
                 );
                 produtos.add(produto);
             }
@@ -115,7 +116,8 @@ public class ProdutoDao {
                     rs.getFloat("preco_produto"),
                     Categoria.valueOf(rs.getString("categoria_produto").toUpperCase()),
                     rs.getInt("estoque_produto"),
-                    rs.getBoolean("prateleira")
+                    rs.getBoolean("prateleira"),
+                    rs.getInt("id_funcionario")
                 );
             }
         } catch (SQLException e) {
@@ -140,7 +142,8 @@ public class ProdutoDao {
                     rs.getFloat("preco_produto"),
                     Categoria.valueOf(rs.getString("categoria_produto").toUpperCase()),
                     rs.getInt("estoque_produto"),
-                    rs.getBoolean("prateleira")
+                    rs.getBoolean("prateleira"),
+                    rs.getInt("id_funcionario")
                 );
             }
         } catch (SQLException e) {
@@ -229,7 +232,8 @@ public class ProdutoDao {
                     rs.getFloat("preco_produto"),
                     Categoria.valueOf(rs.getString("categoria_produto").toUpperCase()),
                     rs.getInt("estoque_produto"),
-                    rs.getBoolean("prateleira")
+                    rs.getBoolean("prateleira"),
+                    rs.getInt("id_funcionario")
                 );
                 produtos.add(produto);
             }
@@ -256,7 +260,8 @@ public class ProdutoDao {
                     rs.getFloat("preco_produto"),
                     Categoria.valueOf(rs.getString("categoria_produto").toUpperCase()), // Garante compatibilidade
                     rs.getInt("estoque_produto"),
-                    rs.getBoolean("prateleira")
+                    rs.getBoolean("prateleira"),
+                    rs.getInt("id_funcionario")
                 );
                 produtos.add(produto);
             }
@@ -282,7 +287,8 @@ public class ProdutoDao {
                     rs.getFloat("preco_produto"),
                     Categoria.valueOf(rs.getString("categoria_produto").toUpperCase()),
                     rs.getInt("estoque_produto"),
-                    rs.getBoolean("prateleira")
+                    rs.getBoolean("prateleira"),
+                    rs.getInt("id_funcionario")
                 );
                 produtos.add(produto);
             }

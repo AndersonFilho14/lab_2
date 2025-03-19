@@ -28,7 +28,13 @@ public class CompraView {
             System.out.println("6  - Finalizar compra");
             System.out.println("0 - Sair");
             System.out.print("Escolha uma opção: ");
-
+            
+            if (!scanner.hasNextInt()) {
+                System.out.println("Entrada inválida! Por favor, digite um número.");
+                scanner.next(); 
+                continue; 
+            }
+            
             int opcao = scanner.nextInt();
             scanner.nextLine(); 
 
@@ -68,9 +74,9 @@ public class CompraView {
             System.out.println("Nenhum produto disponível.");
             return;
         }
-        System.out.println("Produtos disponíveis:");
+        System.out.println("\n ---- Produtos disponíveis:");
         for (Produto p : produtos) {
-            System.out.println("Id produto = " + p.getId() + " - " + p.getNome() + " - R$" + p.getPreco() + " - Estoque: " + p.getQuantidade());
+            System.out.println(p.getId() + " - " + p.getNome() + " - R$" + p.getPreco() + " - Estoque: " + p.getQuantidade());
         }
     }
 
@@ -111,16 +117,16 @@ public class CompraView {
     }
 
     private void visualizarCarrinho() {
-        System.out.println("Itens no carrinho:");
+        System.out.println("\n Itens no carrinho:");
         carrinhoController.getItens().forEach((produto, quantidade) -> {
             BigDecimal precoUnitario = new BigDecimal(produto.getPreco()).setScale(2, RoundingMode.HALF_UP);
             BigDecimal totalItem = precoUnitario.multiply(new BigDecimal(quantidade)).setScale(2, RoundingMode.HALF_UP);
 
-            System.out.println("Id  = " + produto.getId() + " - " + produto.getNome() + " - Quantidade: " 
+            System.out.println(produto.getId() + " - " + produto.getNome() + " - Quantidade: " 
                 + quantidade + " - Preço unitário: R$" + precoUnitario + " - Total: R$" + totalItem);
         });
         BigDecimal totalCompra = new BigDecimal(carrinhoController.calcularTotal()).setScale(2, RoundingMode.HALF_UP);
-        System.out.println("Total da compra: R$" + totalCompra);
+        System.out.println("\n=Total da compra: R$" + totalCompra);
     }
 
     

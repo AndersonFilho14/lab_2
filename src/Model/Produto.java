@@ -11,19 +11,21 @@ public class Produto {
     private Categoria categoria;
     private int quantidade;
     private boolean prateleira;
+    private int id_funcionario;
 
-    // (para listar do banco)
-    public Produto(int id, String nome, String validade, float preco, Categoria categoria, int quantidade, boolean prateleira) {
+    // para o banco
+    public Produto(int id, String nome, String validade, float preco, Categoria categoria, int quantidade, boolean prateleira, int id_funcionario) {
         this.id = id;
         this.nome = nome;
-        this.validade = parseData(validade); // Converte String para LocalDate
+        this.validade = parseData(validade); 
         this.preco = preco;
         this.categoria = categoria;
         this.quantidade = quantidade;
         this.prateleira = prateleira;
+        this.id_funcionario = id_funcionario;
     }
 
-    //(para criação de novos produtos)
+    // para criação de novos produtos
     public Produto(String nome, String validade, float preco, Categoria categoria, int quantidade) {
         this.nome = nome;
         this.validade = parseData(validade);
@@ -38,28 +40,73 @@ public class Produto {
         return LocalDate.parse(data, formatter);
     }
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    
+    public int getId() {
+		return id;
+	}
 
-    public String getNome() { return nome; }
-    public void setNome(String nome) { this.nome = nome; }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public LocalDate getValidade() { return validade; }
-    public void setValidade(String validade) { this.validade = parseData(validade); }
+	public String getNome() {
+		return nome;
+	}
 
-    public float getPreco() { return preco; }
-    public void setPreco(float preco) { this.preco = preco; }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
+	public LocalDate getValidade() {
+		return validade;
+	}
 
-    public Categoria getCategoria() { return categoria; }
-    public void setCategoria(Categoria categoria) { this.categoria = categoria; }
+	public void setValidade(String validade) {
+		this.validade = parseData(validade);
+	}
 
-    public int getQuantidade() { return quantidade; }
-    public void setQuantidade(int quantidade) { this.quantidade = quantidade; }
+	public float getPreco() {
+		return preco;
+	}
 
-    public boolean isPrateleira() { return prateleira; }
-    public void setPrateleira(boolean prateleira) { this.prateleira = prateleira; }
+	public void setPreco(float preco) {
+		this.preco = preco;
+	}
 
-    @Override
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+	public int getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public boolean isPrateleira() {
+		return prateleira;
+	}
+
+	public void setPrateleira(boolean prateleira) {
+		this.prateleira = prateleira;
+	}
+
+	public int getId_funcionario() {
+		return id_funcionario;
+	}
+
+	public void setId_funcionario(int id_funcionario) {
+		this.id_funcionario = id_funcionario;
+	}
+
+	
+	@Override
     public String toString() {
         return getId() + " | " + getNome() + " | " + getCategoria() + " | Preço: " + getPreco() + " | Quantidade no estoque: " + getQuantidade() + " |  Na prateleira: " + isPrateleira();
     }
