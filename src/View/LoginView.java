@@ -32,7 +32,7 @@ public class LoginView {
      * cliente sem cadastro, crie um novo login ou acesse como funcionário.
      */
     public void exibirMenu() {
-        int opcao;
+        int opcao = 1;
         do {
             System.out.println("\nTela de Login:");
             System.out.println("1 - Entrar como cliente cadastrado");
@@ -41,6 +41,12 @@ public class LoginView {
             System.out.println("4 - Acessar como Funcionário");
             System.out.println("0 - Sair");
             System.out.print("Escolha uma opção: ");
+            
+            if (!scanner.hasNextInt()) {
+                System.out.println("Entrada inválida! Por favor, digite um número.");
+                scanner.next(); 
+                continue; 
+            }
             opcao = scanner.nextInt();
             scanner.nextLine(); 
 

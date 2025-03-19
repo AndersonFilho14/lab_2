@@ -25,7 +25,7 @@ public class FinanceiroController {
         Financeiro financeiro = new Financeiro(0, valorCompra, idCliente, null);
         boolean sucesso = financeiroDao.inserirFinanceiro(financeiro);
         if (sucesso) {
-            System.out.println("Compra registrada no financeiro! ID do cliente: " + financeiro.getId());
+            System.out.println("Compra registrada no financeiro! ID da compra: " + financeiro.getId());
         } else {
             System.out.println("Erro ao registrar a compra.");
         }

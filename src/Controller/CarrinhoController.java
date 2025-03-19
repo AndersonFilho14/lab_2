@@ -11,11 +11,14 @@ public class CarrinhoController {
     private Carrinho carrinho;
     private ProdutoController produtoController;
     private FinanceiroController financeiroController;
+    private Scanner scanner; 
+    
 
     public CarrinhoController(Carrinho carrinho, ProdutoController produtoController) {
         this.carrinho = carrinho;
         this.produtoController = produtoController;
         this.financeiroController = new FinanceiroController();
+        this.scanner = new Scanner(System.in);
     }
 
     
@@ -86,35 +89,33 @@ public class CarrinhoController {
         if (total <= 0) {
             return "Erro ao calcular total da compra.";
         }
-
+        
         ClienteController clienteController = new ClienteController();
         Cliente cliente = clienteController.consultarClientePorId(idCliente);
-        System.out.println("pontos fidelidade  "+ cliente.getPontosFidelidade() + "  Nome = " + cliente.getNome() + "  id  " + cliente.getId());
-        
+        System.out.println("pontos fidelidade  " + cliente.getPontosFidelidade() + "  Nome = " + cliente.getNome() + "  id  " + cliente.getId());
+
         if (cliente.getId() != 1 && cliente.getPontosFidelidade() > 0) {
-            System.out.println("Deseja usar seus pontos fidelidade? Você tem " + cliente.getPontosFidelidade() + " pontos disponíveis.");
+            System.out.println("\nDeseja usar seus pontos fidelidade? Você tem " 
+                + cliente.getPontosFidelidade() + " pontos disponíveis.");
             System.out.println("Digite ( S ) para confirmar ou qualquer outra coisa para não usar os pontos.");
 
+            // Removemos o try-with-resources para evitar fechar o scanner
             boolean usarPontos = false;
-            try (Scanner scanner = new Scanner(System.in)) {
-                String resposta = scanner.nextLine().trim().toUpperCase();
-                if (resposta.equals("S")) {
-                    usarPontos = true;
-                }
-            } catch (Exception e) {
-                System.out.println("Erro ao ler a entrada. Nenhum ponto será usado.");
+            String resposta = scanner.nextLine().trim().toUpperCase();  // Usa o scanner já criado na classe
+            if (resposta.equals("S")) {
+                usarPontos = true;
             }
 
             if (usarPontos) {
                 if (cliente.getPontosFidelidade() < total) {
                     total -= cliente.getPontosFidelidade();
                     clienteController.removerPontosFidelidade(idCliente, cliente.getPontosFidelidade());
-                    System.out.println("O valor total da compra agora é "+ total + ". Vc usou "+ cliente.getPontosFidelidade());
+                    System.out.println("O valor total da compra agora é " + total + ". Você usou " + cliente.getPontosFidelidade() + " pontos.");
                 } else {
-                    int pontosTotal = (int) Math.floor(total); 
+                    int pontosTotal = (int) Math.floor(total);  // Limita os pontos ao valor do total
                     clienteController.removerPontosFidelidade(idCliente, pontosTotal);
                     total = 0;
-                    System.out.println("Boa vc juntou pontos fidelidades suficientes para sua compra sair grátis");
+                    System.out.println("Boa, você juntou pontos suficientes para sua compra sair grátis!");
                 }
             }
         }

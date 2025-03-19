@@ -26,8 +26,8 @@ public class Main {
 	public static void main(String[] args) {
 		
 //	    ------ Projeto Principal ------
-//LoginView loginView = new LoginView();
-//loginView.exibirMenu();
+LoginView loginView = new LoginView();
+loginView.exibirMenu();
 
 // ======  Testes  ======   
 // ------ CLiente  ------
@@ -53,11 +53,11 @@ public class Main {
 //produtoView.exibirMenuFuncionario(funcionario);
 		
 // ------  Compra  ------
-ProdutoController produtoController = new ProdutoController();
-Carrinho carrinho = new Carrinho();
-CarrinhoController carrinhoController = new CarrinhoController(carrinho,produtoController);
-CompraView compraView = new CompraView(carrinhoController);
-compraView.exibirMenuCompras(10);
+//ProdutoController produtoController = new ProdutoController();
+//Carrinho carrinho = new Carrinho();
+//CarrinhoController carrinhoController = new CarrinhoController(carrinho,produtoController);
+//CompraView compraView = new CompraView(carrinhoController);
+//compraView.exibirMenuCompras(10);
 
 	}
 }
