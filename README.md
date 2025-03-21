@@ -58,23 +58,30 @@ lab_2/
  ├── src/
  │   ├── main.java
  │   ├── Controller/
+ │   │    ├── CarrinhoController.java
  │   │    ├── ClienteController.java
+ │   │    ├── FinanceiroController.java
  │   │    ├── FuncionarioController.java
  │   │    └── ProdutoController.java
  │   ├── Model/
  │   │    ├── Dao/
  │   │    │   ├── ClienteDao.java
+ │   │    │   ├── DAO.java
+ │   │    │   ├── FinanceiroDao.java
  │   │    │   ├── FuncionarioDao.java
  │   │    │   └── ProdutoDao.java
  │   │    ├── Database/
  │   │    │   └── ConnectionFactory
+ │   │    ├── Carrinho.java
  │   │    ├── Categoria.java
  │   │    ├── Cliente.java
+ │   │    ├── Financeiro.java
  │   │    ├── Funcionario.java
  │   │    ├── Pessoa.java
  │   │    └── Produto.java
  │   └── View/
  │        ├── ClienteView.java
+ │        ├── CompraView.java
  │        ├── FuncionarioView.java
  │        ├── LoginView.java
  │        └── ProdutoView.java
