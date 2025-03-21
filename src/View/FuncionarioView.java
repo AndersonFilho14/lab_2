@@ -291,7 +291,8 @@ public class FuncionarioView {
                     if (resposta.equalsIgnoreCase("S")) {
                         System.out.print("Digite seu nome para confirmar: ");
                         String nomeConfirmacao = scanner.nextLine();
-	                        if (nomeConfirmacao.equals(funcionario.getNome())) {
+                        Funcionario funiconarioN = funcionarioController.buscarFuncionarioPorId(funcionario.getId());
+	                        if (nomeConfirmacao.equals(funiconarioN.getNome())) {
 	                        	funcionarioController.demitirFuncionario(nomeConfirmacao);
 	                        	System.out.println("Você foi demitido.");
 	                        }else {
